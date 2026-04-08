@@ -295,32 +295,32 @@ class _AcceuilState extends State<Acceuil> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: (int index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-        backgroundColor: Colors.white,
-        selectedItemColor: primaryOrange,
-        unselectedItemColor: const Color(0xFF0A0D14),
-        showUnselectedLabels: true,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Accueil'),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.location_city),
-            label: 'Annuaire',
-          ),
-          BottomNavigationBarItem(icon: Icon(Icons.star), label: 'Favoris'),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            label: 'Notifs',
-          ),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profil'),
-        ],
-        type: BottomNavigationBarType.fixed,
-      ),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _selectedIndex,
+          onTap: (int index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
+          backgroundColor: Colors.white,
+          selectedItemColor: primaryOrange,
+          unselectedItemColor: const Color(0xFF0A0D14),
+          showUnselectedLabels: true,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Accueil'),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.location_city),
+              label: 'Annuaire',
+            ),
+            BottomNavigationBarItem(icon: Icon(Icons.star), label: 'Favoris'),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.notifications),
+              label: 'Notifs',
+            ),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profil'),
+          ],
+          type: BottomNavigationBarType.fixed,
+        ),
     );
   }
 }
