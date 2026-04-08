@@ -11,14 +11,14 @@ class Page09ViewModel extends ChangeNotifier {
   StudentLevel get level => _level;
   int get currentIndex => _currentIndex;
 
-  void setLevel(StudentLevel newLevel) {
+  void setLevel(StudentLevel newLevel) { //change le niveau et met le quiz à zéro
     _level = newLevel;
     _currentIndex = 0;
     _scores.clear();
     notifyListeners();
   }
 
-  void toggleLevel() {
+  void toggleLevel() { //bascule entre bepc et bac
     _level = (_level == StudentLevel.bepc) ? StudentLevel.bac : StudentLevel.bepc;
     _currentIndex = 0;
     _scores.clear();

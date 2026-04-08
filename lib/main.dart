@@ -4,10 +4,7 @@ import 'view_models/page_09_view_model.dart';
 import 'view_models/page_10_view_model.dart';
 import 'view_models/page_11_view_model.dart';
 import 'view_models/page_12_view_model.dart';
-import 'views/page_09/page_09_view.dart';
-import 'views/page_10/page_10_view.dart';
-import 'views/page_11/page_11_view.dart';
-import 'views/page_12/page_12_view.dart';
+import 'views/main_navigation_view.dart';
 
 void main() {
   runApp(
@@ -35,7 +32,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFE67E22)),
         useMaterial3: true,
       ),
-      home: const Page09View(),
+      home: const MainNavigationView(),
     );
   }
 }
