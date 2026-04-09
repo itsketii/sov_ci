@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/etablissement.dart';
+import 'fiche_etablissement.dart';
 
 
 
@@ -130,6 +131,12 @@ class _AnnuaireState extends State<Annuaire> {
                 return Card(
                   margin: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                   child: ListTile(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => FicheEtablissement(etablissement: etab)),
+                      );
+                    },
                     leading: CircleAvatar(
                       backgroundColor: Colors.orange[100],
                       child: Icon(Icons.school, color: Colors.orange),
