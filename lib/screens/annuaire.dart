@@ -154,7 +154,7 @@ class _AnnuaireState extends State<Annuaire> {
         type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Accueil'),
-          BottomNavigationBarItem(icon: Icon(Icons.location_city), label: 'Annuaire'),
+          BottomNavigationBarItem(icon: Icon(Icons.archive), label: 'Annuaire'),
           BottomNavigationBarItem(icon: Icon(Icons.star), label: 'Favoris'),
           BottomNavigationBarItem(icon: Icon(Icons.notifications), label: 'Notifs'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profil'),

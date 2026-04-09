@@ -309,7 +309,7 @@ class _AcceuilState extends State<Acceuil> {
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Accueil'),
             BottomNavigationBarItem(
-              icon: Icon(Icons.location_city),
+              icon: Icon(Icons.archive),
               label: 'Annuaire',
             ),
             BottomNavigationBarItem(icon: Icon(Icons.star), label: 'Favoris'),
