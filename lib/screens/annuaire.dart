@@ -11,7 +11,6 @@ class Annuaire extends StatefulWidget {
 }
 
 class _AnnuaireState extends State<Annuaire> {
-  int _selectedIndex = 0;
   String _filtreActif = "Tous";
   String _recherche = "";
   static const Color primaryOrange = Color(0xFFF88500);
@@ -143,21 +142,6 @@ class _AnnuaireState extends State<Annuaire> {
               },
             ),
           ),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: (index) => setState(() => _selectedIndex = index),
-        selectedItemColor: primaryOrange,
-        unselectedItemColor: const Color(0xFF0A0D14),
-        showUnselectedLabels: true,
-        type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Accueil'),
-          BottomNavigationBarItem(icon: Icon(Icons.archive), label: 'Annuaire'),
-          BottomNavigationBarItem(icon: Icon(Icons.star), label: 'Favoris'),
-          BottomNavigationBarItem(icon: Icon(Icons.notifications), label: 'Notifs'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profil'),
         ],
       ),
     );
