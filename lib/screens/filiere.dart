@@ -39,7 +39,6 @@ class FicheFiliere extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // header vert
             Container(
               width: double.infinity,
               color: const Color(0xFF04A447),
@@ -54,7 +53,6 @@ class FicheFiliere extends StatelessWidget {
                 ],
               ),
             ),
-            // infos
             ListTile(
               leading: Icon(Icons.access_time, color: Colors.green),
               title: Text("Durée"),
@@ -173,6 +171,33 @@ final List<Filiere> filieres = [
     salaireMoyen: "220 000 FCFA",
     debouche: Debouche.moyenne,
   ),
+  Filiere(
+    nom: "Filiere Mathematique",
+    domaine: "Mathematiques",
+    duree: "3 ans",
+    description: "Formation aux mathématiques appliquées et théoriques",
+    debouches: "Mathématicien, Analyste de données, Enseignant",
+    salaireMoyen: "250 000 FCFA",
+    debouche: Debouche.recherchee,
+  ),
+  Filiere(
+    nom: "Filiere litteraire",
+    domaine: "Langues et littérature",
+    duree: "3 ans",
+    description: "La filière littéraire étudie les langues, la culture et la communication.",
+    debouches: "Diplômate, Écrivain/Auteur, Bibliothécaire",
+    salaireMoyen: "350 000 FCFA",
+    debouche: Debouche.saturee,
+  ),
+  Filiere(
+    nom: "Filiere Scientifique",
+    domaine: "Physique-Chimie",
+    duree: "3 ans",
+    description: "Formation aux sciences physiques et naturelles",
+    debouches: "Chercheur, Enseignant, Technicien de laboratoire",
+    salaireMoyen: "300 000 FCFA",
+    debouche: Debouche.recherchee,
+  ),
 ];
 
 
@@ -186,77 +211,112 @@ class ExplorateurFilieres extends StatefulWidget {
 class _ExplorateurFilieresState extends State<ExplorateurFilieres> {
 
   String _recherche = "";
+  String _filtreCategorie = "Tous";
   static const Color primaryGreen = Color(0xFF04A447);
 
   @override
   Widget build(BuildContext context) {
-    final listeFiltree = filieres.where((filieres) {
-      if (_recherche.isNotEmpty && !filieres.nom.toLowerCase().contains(_recherche.toLowerCase())) return false;
+    final listeFiltree = filieres.where((filiere) {
+      if (_recherche.isNotEmpty && !filiere.nom.toLowerCase().contains(_recherche.toLowerCase())) {
+        return false;
+      }
+      if (_filtreCategorie == "Tous") return true;
+      if (_filtreCategorie == "Lycée") {
+        return filiere.domaine == "Langues et littérature" ||
+            filiere.domaine == "Mathematiques" ||
+            filiere.domaine == "Physique-Chimie";
+      }
+      if (_filtreCategorie == "Université") {
+        return !filiere.nom.contains("Lycée") && !filiere.nom.contains("litteraire") && !filiere.nom.contains("Mathématique");
+      }
       return true;
     }).toList();
+
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Explorateur de filières"),
+        backgroundColor: primaryGreen,
+        foregroundColor: Colors.white,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
       body: Column(
         children: [
-          Container(
-            width: double.infinity,
-            color: primaryGreen,
-            padding: const EdgeInsets.fromLTRB(16, 48, 16, 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text("Explorateur de filieres",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white)),
-                Text("Supérieur & Secondaire",
-                    style: TextStyle(fontSize: 13, color: Colors.white)),
-              ],
-            ),
-          ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(16, 5, 16, 0),
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
             child: TextField(
               onChanged: (valeur) => setState(() => _recherche = valeur),
               decoration: InputDecoration(
-                hintText: "Rechercher un établissement...",
-                prefixIcon: Icon(Icons.search),
+                hintText: "Rechercher une filière...",
+                prefixIcon: const Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
               ),
             ),
           ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Row(
+              children: [
+                FilterChip(
+                  label: const Text("Tous"),
+                  selected: _filtreCategorie == "Tous",
+                  onSelected: (selected) => setState(() => _filtreCategorie = "Tous"),
+                  backgroundColor: Colors.grey[200],
+                  selectedColor: primaryGreen,
+                  labelStyle: TextStyle(
+                    color: _filtreCategorie == "Tous" ? Colors.white : Colors.black,
+                  ),
+                ),
+                const SizedBox(width: 8),
+                FilterChip(
+                  label: const Text("Lycée"),
+                  selected: _filtreCategorie == "Lycée",
+                  onSelected: (selected) => setState(() => _filtreCategorie = "Lycée"),
+                  backgroundColor: Colors.grey[200],
+                  selectedColor: primaryGreen,
+                  labelStyle: TextStyle(
+                    color: _filtreCategorie == "Lycée" ? Colors.white : Colors.black,
+                  ),
+                ),
+                const SizedBox(width: 8),
+                FilterChip(
+                  label: const Text("Université"),
+                  selected: _filtreCategorie == "Université",
+                  onSelected: (selected) => setState(() => _filtreCategorie = "Université"),
+                  backgroundColor: Colors.grey[200],
+                  selectedColor: primaryGreen,
+                  labelStyle: TextStyle(
+                    color: _filtreCategorie == "Université" ? Colors.white : Colors.black,
+                  ),
+                ),
+              ],
+            ),
+          ),
           Expanded(
             child: ListView.builder(
               itemCount: listeFiltree.length,
               itemBuilder: (context, index) {
-                final filieres = listeFiltree[index];
+                final filiere = listeFiltree[index];
                 return Card(
-                  margin: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                   child: ListTile(
                     leading: CircleAvatar(
                       backgroundColor: Colors.green[100],
-                      child: Icon(
-                        filieres.domaine == "Sciences & Tech" ? Icons.computer
-                            : filieres.domaine == "Sciences juridiques" ? Icons.gavel
-                            : filieres.domaine == "Lettres & Arts" ? Icons.menu_book
-                            : filieres.domaine == "Sciences de la santé" ? Icons.medical_services
-                            : filieres.domaine == "Batiment" ? Icons.apartment
-                            : filieres.domaine == "Buisness" ? Icons.business_center
-                            : filieres.domaine == "Sciences agronomiques" ? Icons.agriculture
-                            : filieres.domaine == "Economie & Finance" ? Icons.attach_money
-                            : filieres.domaine == "Journalisme & Medias" ? Icons.newspaper
-                            : filieres.domaine == "Tourisme" ? Icons.flight
-                            : Icons.business_center,
-                        color: Colors.green,
-                      ),
+                      child: _getIconForDomaine(filiere.domaine),
                     ),
-                    title: Text(filieres.nom),
-                    subtitle: Text("${filieres.domaine} • ${filieres.duree}"),
-                    trailing: _buildDeboucheBadge(filieres.debouche),
+                    title: Text(filiere.nom),
+                    subtitle: Text("${filiere.domaine} • ${filiere.duree}"),
+                    trailing: _buildDeboucheBadge(filiere.debouche),
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => FicheFiliere(filiere: filieres),
+                          builder: (context) => FicheFiliere(filiere: filiere),
                         ),
                       );
                     },
@@ -280,5 +340,22 @@ class _ExplorateurFilieresState extends State<ExplorateurFilieres> {
       decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(4)),
       child: Text(debouches.name, style: const TextStyle(color: Colors.white, fontSize: 11)),
     );
+  }
+
+  Widget _getIconForDomaine(String domaine) {
+    if (domaine == "Sciences & Tech") return Icon(Icons.computer, color: Colors.green);
+    if (domaine == "Sciences juridiques") return Icon(Icons.gavel, color: Colors.green);
+    if (domaine == "Lettres & Arts") return Icon(Icons.menu_book, color: Colors.green);
+    if (domaine == "Sciences de la santé") return Icon(Icons.medical_services, color: Colors.green);
+    if (domaine == "Batiment") return Icon(Icons.apartment, color: Colors.green);
+    if (domaine == "Buisness") return Icon(Icons.business_center, color: Colors.green);
+    if (domaine == "Sciences agronomiques") return Icon(Icons.agriculture, color: Colors.green);
+    if (domaine == "Economie & Finance") return Icon(Icons.attach_money, color: Colors.green);
+    if (domaine == "Journalisme & Medias") return Icon(Icons.newspaper, color: Colors.green);
+    if (domaine == "Tourisme") return Icon(Icons.flight, color: Colors.green);
+    if (domaine == "Mathematiques") return Icon(Icons.calculate, color: Colors.green);
+    if (domaine == "Langues et littérature") return Icon(Icons.library_books, color: Colors.green);
+    if (domaine == "Physique-Chimie") return Icon(Icons.science, color: Colors.green);
+    return Icon(Icons.business_center, color: Colors.green);
   }
 }

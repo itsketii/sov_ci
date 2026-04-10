@@ -34,6 +34,8 @@ class _AnnuaireState extends State<Annuaire> {
       if (_filtreActif == "Fermée") return etab.statut == StatutInscription.fermer;
       if (_filtreActif == "Par concours") return etab.concours == Concours.oui;
       if (_filtreActif == "Pas de concours") return etab.concours == Concours.non;
+      if (_filtreActif == "Post BAC") return etab.niveau == NiveauEtablissement.superieur;
+      if (_filtreActif == "Post BEPC") return etab.niveau == NiveauEtablissement.secondaire;
       return true;
     }).toList();
     return Scaffold(
@@ -112,6 +114,16 @@ class _AnnuaireState extends State<Annuaire> {
                 ActionChip(
                   label: Text("Pas de concours"),
                   onPressed: () => setState(() => _filtreActif = "Pas de concours"),
+                ),
+                SizedBox(width: 8),
+                ActionChip(
+                  label: Text("Post BAC"),
+                  onPressed: () => setState(() => _filtreActif = "Post BAC"),
+                ),
+                SizedBox(width: 8),
+                ActionChip(
+                  label: Text("Post BEPC"),
+                  onPressed: () => setState(() => _filtreActif = "Post BEPC"),
                 ),
               ],
             ),

@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../models/etablissement.dart';
+import '../view_models/page_12_view_model.dart';
 import '../views/page_09/page_09_view.dart';
 import '../views/page_11/page_11_view.dart';
-import '../models/etablissement.dart';
-import 'fiche_etablissement.dart';
 import 'annuaire.dart';
+import 'fiche_etablissement.dart';
 import 'filiere.dart';
+import 'recherche_globale.dart';
 
 
 class Acceuil extends StatefulWidget {
@@ -17,7 +21,7 @@ class Acceuil extends StatefulWidget {
 class _AcceuilState extends State<Acceuil> {
 
   int get joursAvantBAC {
-    final dateBAC = DateTime(2026, 6, 15); // ← mets la vraie date du BAC ici
+    final dateBAC = DateTime(2026, 6, 15);
     final aujourd_hui = DateTime.now();
     return dateBAC.difference(aujourd_hui).inDays;
   }
@@ -32,6 +36,9 @@ class _AcceuilState extends State<Acceuil> {
 
   @override
   Widget build(BuildContext context) {
+    final userViewModel = Provider.of<Page12ViewModel>(context);
+    final userName = userViewModel.isGuest ? "Visiteur" : userViewModel.name;
+
     final double appBarAndHeaderHeight = appBarHeight + headerVerticalPadding + headerContentHeightEstimate;
     final double minContentHeight = MediaQuery.of(context).size.height - appBarAndHeaderHeight;
 
@@ -124,10 +131,10 @@ class _AcceuilState extends State<Acceuil> {
                     style: TextStyle(fontSize: 14, color: Colors.white),
                   ),
                   const SizedBox(height: 18),
-                  const Text(
-                    'Bonjour Kouame',
-                    style: TextStyle(
-                      fontSize: 32,
+                Text(
+                  'Bonjour $userName',
+                  style: const TextStyle(
+                    fontSize: 32,
                       fontWeight: FontWeight.w500,
                       color: Colors.white,
                     ),
@@ -178,6 +185,13 @@ class _AcceuilState extends State<Acceuil> {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(16, 18, 16, 8),
                           child: TextField(
+                      readOnly: true,
+                      onTap: () {
+                        Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const RechercheGlobale()),
+                              );
+                            },
                             style: const TextStyle(color: quickTileTitleColor),
                             decoration: InputDecoration(
                               hintText: 'Rechercher un etablissement...',
@@ -215,7 +229,7 @@ class _AcceuilState extends State<Acceuil> {
                                 child: _QuickTile(
                                   icon: Icons.home_work_rounded,
                                   title: 'Annuaire',
-                                  subtitle: '180 etablissements',
+                                  subtitle: '${etablissements.length} etablissements',
                                   startColor: Color(0xFF2E2417),
                                   endColor: Color(0xFF2A1E13),
                                   onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => Annuaire())),
@@ -321,17 +335,46 @@ class _AcceuilState extends State<Acceuil> {
                                   ));
                                 }
                               ),
+                              SizedBox(width: 12),
+                              _FeaturedCard(
+                                topColor: primaryOrange,
+                                title: 'IRMA',
+                                status: 'Overte',
+                                statusColor: primaryOrange,
+                                onTap: () {
+                                  final etab = etablissements.firstWhere((e) =>
+                                  e.nom == "IRMA");
+                                  Navigator.push(context, MaterialPageRoute(
+                                      builder: (_) =>
+                                          FicheEtablissement(etablissement: etab)
+                                  ));
+                                },
+                              ),
+                              SizedBox(width: 12),
+                              _FeaturedCard(
+                                topColor: statusGreen,
+                                title: 'Lycée Technique',
+                                status: 'Ouvert',
+                                statusColor: statusGreen,
+                                onTap: () {
+                                  final etab = etablissements.firstWhere((e) =>
+                                  e.nom == "Lycée Technique");
+                                  Navigator.push(context, MaterialPageRoute(
+                                      builder: (_) =>
+                                          FicheEtablissement(etablissement: etab)
+                                  ));
+                                },
+                              ),
                             ],
                           ),
                         ),
-                        const SizedBox(height: 20),
                       ],
                     ),
                   ),
-              ),
-            ],
-        ),
-        ),
+            ),
+          ],
+        )
+      ),
     );
   }
 }
