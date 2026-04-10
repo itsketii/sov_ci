@@ -3,6 +3,7 @@ import '../views/page_09/page_09_view.dart';
 import '../views/page_11/page_11_view.dart';
 import '../models/etablissement.dart';
 import 'fiche_etablissement.dart';
+import 'recherche_globale.dart';
 import 'annuaire.dart';
 import 'filiere.dart';
 
@@ -178,6 +179,13 @@ class _AcceuilState extends State<Acceuil> {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(16, 18, 16, 8),
                           child: TextField(
+                            readOnly: true,  // ← REND NON EDITABLE
+                            onTap: () {      // ← NAVIGUE VERS RECHERCHE
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const RechercheGlobale()),
+                              );
+                            },
                             style: const TextStyle(color: quickTileTitleColor),
                             decoration: InputDecoration(
                               hintText: 'Rechercher un etablissement...',
@@ -215,7 +223,7 @@ class _AcceuilState extends State<Acceuil> {
                                 child: _QuickTile(
                                   icon: Icons.home_work_rounded,
                                   title: 'Annuaire',
-                                  subtitle: '180 etablissements',
+                                  subtitle: '${etablissements.length} etablissements',
                                   startColor: Color(0xFF2E2417),
                                   endColor: Color(0xFF2A1E13),
                                   onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => Annuaire())),
@@ -321,17 +329,46 @@ class _AcceuilState extends State<Acceuil> {
                                   ));
                                 }
                               ),
+                              SizedBox(width: 12),
+                              _FeaturedCard(
+                                topColor: primaryOrange,
+                                title: 'IRMA',
+                                status: 'Overte',
+                                statusColor: primaryOrange,
+                                onTap: () {
+                                  final etab = etablissements.firstWhere((e) =>
+                                  e.nom == "IRMA");
+                                  Navigator.push(context, MaterialPageRoute(
+                                      builder: (_) =>
+                                          FicheEtablissement(etablissement: etab)
+                                  ));
+                                },
+                              ),
+                              SizedBox(width: 12),
+                              _FeaturedCard(
+                                topColor: statusGreen,
+                                title: 'Lycée Technique',
+                                status: 'Ouvert',
+                                statusColor: statusGreen,
+                                onTap: () {
+                                  final etab = etablissements.firstWhere((e) =>
+                                  e.nom == "Lycée Technique");
+                                  Navigator.push(context, MaterialPageRoute(
+                                      builder: (_) =>
+                                          FicheEtablissement(etablissement: etab)
+                                  ));
+                                },
+                              ),
                             ],
                           ),
                         ),
-                        const SizedBox(height: 20),
                       ],
                     ),
                   ),
-              ),
-            ],
-        ),
-        ),
+            ),
+          ],
+        )
+      ),
     );
   }
 }
