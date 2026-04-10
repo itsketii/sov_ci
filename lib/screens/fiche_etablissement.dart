@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../models/etablissement.dart';
+import '../services/database_service.dart';
+import '../models/orientation_models.dart';
+
+
 
 class FicheEtablissement extends StatelessWidget {
   final Etablissement etablissement;
@@ -46,9 +51,47 @@ class FicheEtablissement extends StatelessWidget {
               padding: const EdgeInsets.all(16),
               child: Row(
                 children: [
-                  Expanded(child: OutlinedButton.icon(onPressed: () {}, icon: const Icon(Icons.star, color: Colors.orange), label: const Text("Favoris", style: TextStyle(color: Colors.orange)), style: OutlinedButton.styleFrom(side: const BorderSide(color: Colors.orange)))),
+                  Expanded(child:
+                  OutlinedButton.icon(
+                      onPressed: () async {
+                        final dbService = DatabaseService();
+                        final messenger = ScaffoldMessenger.of(context);
+                        await dbService.addFavorite(
+                          Establishment(
+                            id: etablissement.nom,
+                            name: etablissement.nom,
+                            type: etablissement.type.name,
+                            location: etablissement.ville,
+                            fees: etablissement.fraisScolarite,
+                            field: etablissement.filieres,
+                            totalFields: 1,
+                            reputation: 4,
+                            insertionRate: "N/A",
+                          ),
+                        );
+                        messenger.showSnackBar(
+                          SnackBar(content: Text("${etablissement.nom} ajouté aux favoris !")),
+                        );
+                      },                      icon:
+                        const Icon(Icons.star,
+                            color: Colors.orange),
+                      label:
+                        const Text("Favoris",
+                            style: TextStyle(color: Colors.orange)),
+                      style:
+                        OutlinedButton.styleFrom(side: const BorderSide(color: Colors.orange)))),
                   const SizedBox(width: 12),
-                  Expanded(child: ElevatedButton.icon(onPressed: () {}, icon: const Icon(Icons.directions), label: const Text("Y aller"), style: ElevatedButton.styleFrom(backgroundColor: Colors.green))),
+                  Expanded(child:
+                    ElevatedButton.icon(
+                        onPressed: () async {
+                          final url = Uri.parse(
+                              "https://www.google.com/maps/search/?api=1&query=${etablissement.latitude},${etablissement.longitude}"
+                          );
+                          await launchUrl(url, mode: LaunchMode.externalApplication);
+                        },
+                        icon: const Icon(Icons.directions),
+                        label: const Text("Y aller"),
+                        style: ElevatedButton.styleFrom(backgroundColor: Colors.green))),
                 ],
               ),
             ),

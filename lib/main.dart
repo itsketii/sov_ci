@@ -8,6 +8,9 @@ import 'views/page_09/page_09_view.dart';
 import 'views/page_10/page_10_view.dart';
 import 'views/page_11/page_11_view.dart';
 import 'views/page_12/page_12_view.dart';
+import 'screens/acceuil.dart';
+
+
 
 void main() {
   runApp(
@@ -35,7 +38,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFE67E22)),
         useMaterial3: true,
       ),
-      home: const Page09View(),
+      home: const Acceuil(),
     );
   }
 }

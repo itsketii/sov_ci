@@ -37,6 +37,12 @@ class _AnnuaireState extends State<Annuaire> {
       return true;
     }).toList();
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color(0xFFF88500),
+        foregroundColor: Colors.white,
+        elevation: 0,
+        title: const Text("Annuaire"),
+      ),
       body: Column(
         children: [
           Container(
