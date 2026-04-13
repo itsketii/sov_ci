@@ -4,7 +4,7 @@ import 'view_models/page_09_view_model.dart';
 import 'view_models/page_10_view_model.dart';
 import 'view_models/page_11_view_model.dart';
 import 'view_models/page_12_view_model.dart';
-import 'views/main_navigation_view.dart';
+import 'views/page_01/page_01_view.dart';
 
 void main() {
   runApp(
@@ -29,10 +29,12 @@ class MyApp extends StatelessWidget {
       title: 'SOV.CI',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFE67E22)),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFFF6B2B)),
         useMaterial3: true,
+        fontFamily: 'Poppins', // Si vous avez ajouté la police Poppins
       ),
-      home: const MainNavigationView(),
+      // L'application commence maintenant sur le Splash Screen
+      home: const Page01View(),
     );
   }
 }
