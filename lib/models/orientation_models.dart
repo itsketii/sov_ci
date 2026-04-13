@@ -1,5 +1,5 @@
 enum StudentLevel { bepc, bac }
-
+//le model ne contient aucune logique ,juste des variables .ild définissent les objets que l'application manipule
 enum ApplicationStatus { enPrepa, depose, enAttente, accepte }
 
 class Establishment {
