@@ -5,6 +5,12 @@ import 'view_models/page_10_view_model.dart';
 import 'view_models/page_11_view_model.dart';
 import 'view_models/page_12_view_model.dart';
 import 'views/page_01/page_01_view.dart';
+// Note: Les imports de ta collègue sont conservés si besoin
+// import 'views/page_09/page_09_view.dart';
+// import 'views/page_10/page_10_view.dart';
+// import 'views/page_11/page_11_view.dart';
+// import 'views/page_12/page_12_view.dart';
+// import 'screens/acceuil.dart';
 
 void main() {
   runApp(
@@ -31,9 +37,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFFF6B2B)),
         useMaterial3: true,
-        fontFamily: 'Poppins', // Si vous avez ajouté la police Poppins
+        fontFamily: 'Poppins',
       ),
-      // L'application commence maintenant sur le Splash Screen
+      // Le point d'entrée reste ton Splash Screen
       home: const Page01View(),
     );
   }
