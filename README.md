@@ -1,8 +1,6 @@
 # CONTEXTE
 
-Dans le cadre d'un projet scolaire, ils nous a été demandé de créer une application avec certains critères que :
-*(...)
-Alors les membres de mon groupe et moi avons dans un premier temps opter pour ce projet nomé SOV.CI.
+Dans le cadre d'un projet scolaire, ils nous a été demandé de créer une application, alors les membres de mon groupe et moi avons dans un premier temps opter pour ce projet nomé SOV.CI.
 
 # sov_ci
 
