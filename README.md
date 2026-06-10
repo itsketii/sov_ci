@@ -1,3 +1,9 @@
+# CONTEXTE
+
+Dans le cadre d'un projet scolaire, ils nous a été demandé de créer une application avec certains critères que :
+*(...)
+Alors les membres de mon groupe et moi avons dans un premier temps opter pour ce projet nomé SOV.CI.
+
 # sov_ci
 
 SOV.CI (Salon d'Orientation Virtuelle de Côte d'Ivoire) est une application mobile multiplateforme conçue pour accompagner les élèves ivoiriens dans leur orientation académique et professionnelle après le BEPC et le Baccalauréat.
