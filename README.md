@@ -12,18 +12,3 @@ L’application propose un système interactif de questions permettant de guider
 Développée avec Flutter, SOV.CI met l’accent sur une expérience utilisateur simple, intuitive et accessible, avec la possibilité d’évoluer vers une utilisation hors connexion grâce à la sauvegarde locale des données.
 
 Ce projet s’inscrit dans une démarche de digitalisation de l’orientation scolaire en Côte d’Ivoire, afin de faciliter l’accès à l’information et d’aider les élèves à faire des choix éclairés pour leur avenir.
-
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
